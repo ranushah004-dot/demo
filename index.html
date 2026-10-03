@@ -1,0 +1,2565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EZYBAAZAAR Loan</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="header">
+    <div class="logo">
+        <span>EZY</span>BAAZAAR <small>LOAN</small>
+    </div>
+
+    <nav>
+        <a onclick="showPage('home')">Home</a>
+        <a onclick="showPage('verification')">Loan Verification</a>
+        <a onclick="showPage('emi')">EMI Calculator</a>
+        <a onclick="showPage('login')">Login</a>
+        <a onclick="showPage('adminLogin')">Admin</a>
+    </nav>
+</header>
+
+
+<!-- ================= HOME ================= -->
+
+<section id="home" class="page active">
+
+    <div class="hero">
+        <div>
+            <p class="tag">SMART • SIMPLE • SECURE</p>
+
+            <h1>
+                Your Loan Journey,
+                <span>Made Easy.</span>
+            </h1>
+
+            <p class="hero-text">
+                Apply for loans, verify documents, check CIBIL score,
+                calculate EMI and track your application from one place.
+            </p>
+
+            <button onclick="showPage('register')" class="btn">
+                Apply for Loan
+            </button>
+
+            <button onclick="showPage('login')" class="btn secondary">
+                Customer Login
+            </button>
+        </div>
+
+        <div class="hero-card">
+            <div class="money-icon">₹</div>
+            <h2>EZYBAAZAAR Loan</h2>
+            <p>Fast and simple loan processing system</p>
+
+            <div class="mini-stat">
+                <b>725+</b>
+                <span>Minimum CIBIL Score</span>
+            </div>
+
+            <div class="mini-stat">
+                <b>100%</b>
+                <span>Digital Verification</span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+
+        <h2 class="section-title">Our Services</h2>
+
+        <div class="cards">
+
+            <div class="service-card" onclick="showPage('verification')">
+                <div class="icon">✓</div>
+                <h3>Loan Verification</h3>
+                <p>Verify documents, PAN and CIBIL score.</p>
+            </div>
+
+            <div class="service-card" onclick="showPage('emi')">
+                <div class="icon">₹</div>
+                <h3>EMI Calculator</h3>
+                <p>Calculate your monthly loan EMI easily.</p>
+            </div>
+
+            <div class="service-card" onclick="showPage('register')">
+                <div class="icon">📝</div>
+                <h3>Loan Application</h3>
+                <p>Submit your loan application online.</p>
+            </div>
+
+            <div class="service-card" onclick="showPage('login')">
+                <div class="icon">👤</div>
+                <h3>Customer Login</h3>
+                <p>Check your application and loan status.</p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ================= REGISTER ================= -->
+
+<section id="register" class="page">
+
+    <div class="container narrow">
+
+        <div class="form-card">
+
+            <h2>Customer Registration</h2>
+            <p class="sub-text">Create your EZYBAAZAAR Loan account</p>
+
+            <form onsubmit="registerCustomer(event)">
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="regName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mobile Number</label>
+                        <input type="tel"
+                               id="regMobile"
+                               maxlength="10"
+                               pattern="[0-9]{10}"
+                               required>
+                    </div>
+
+                </div>
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="regEmail" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="regPassword" minlength="4" required>
+                    </div>
+
+                </div>
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label>Date of Birth</label>
+                        <input type="date" id="regDob" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Address</label>
+                        <input type="text" id="regAddress" required>
+                    </div>
+
+                </div>
+
+                <button class="btn full" type="submit">
+                    Register & Get OTP
+                </button>
+
+            </form>
+
+            <p class="bottom-text">
+                Already registered?
+                <a onclick="showPage('login')">Login here</a>
+            </p>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ================= OTP ================= -->
+
+<section id="otp" class="page">
+
+    <div class="container small">
+
+        <div class="form-card center">
+
+            <div class="otp-icon">🔐</div>
+
+            <h2>Mobile OTP Verification</h2>
+
+            <p>
+                OTP has been sent to your registered mobile number.
+            </p>
+
+            <input
+                type="text"
+                id="otpInput"
+                class="otp-input"
+                maxlength="4"
+                placeholder="Enter OTP">
+
+            <p class="demo-otp">
+                Demo OTP: <b>6547</b>
+            </p>
+
+            <button onclick="verifyOTP()" class="btn full">
+                Verify OTP
+            </button>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ================= LOGIN ================= -->
+
+<section id="login" class="page">
+
+    <div class="container small">
+
+        <div class="form-card">
+
+            <h2>Customer Login</h2>
+            <p class="sub-text">Login using your registered mobile number</p>
+
+            <form onsubmit="customerLogin(event)">
+
+                <div class="form-group">
+                    <label>Mobile Number</label>
+                    <input
+                        type="tel"
+                        id="loginMobile"
+                        maxlength="10"
+                        pattern="[0-9]{10}"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        required>
+                </div>
+
+                <button class="btn full" type="submit">
+                    Login
+                </button>
+
+            </form>
+
+            <p class="bottom-text">
+                New customer?
+                <a onclick="showPage('register')">Register here</a>
+            </p>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ================= CUSTOMER DASHBOARD ================= -->
+
+<section id="dashboard" class="page">
+
+    <div class="container">
+
+        <div class="dashboard-header">
+            <div>
+                <p class="tag">CUSTOMER PORTAL</p>
+                <h2>Welcome, <span id="dashboardName"></span> 👋</h2>
+                <p>Manage your loan application from here.</p>
+            </div>
+
+            <button class="btn danger" onclick="logoutCustomer()">
+                Logout
+            </button>
+        </div>
+
+
+        <div class="dashboard-grid">
+
+            <div class="dash-card">
+                <span>Application ID</span>
+                <strong id="dashApplicationId">Not Applied</strong>
+            </div>
+
+            <div class="dash-card">
+                <span>Loan Status</span>
+                <strong id="dashStatus">Not Applied</strong>
+            </div>
+
+            <div class="dash-card">
+                <span>CIBIL Score</span>
+                <strong id="dashCibil">Not Checked</strong>
+            </div>
+
+            <div class="dash-card">
+                <span>Verification</span>
+                <strong id="dashVerification">Pending</strong>
+            </div>
+
+        </div>
+
+
+        <div class="dashboard-actions">
+
+            <button onclick="showPage('verification')" class="action-card">
+                <span>📋</span>
+                <b>Loan Verification</b>
+                <small>Documents, PAN & CIBIL</small>
+            </button>
+
+            <button onclick="showPage('loanApplication')" class="action-card">
+                <span>💰</span>
+                <b>Loan Application</b>
+                <small>Apply for a loan</small>
+            </button>
+
+            <button onclick="showPage('status')" class="action-card">
+                <span>📊</span>
+                <b>Application Status</b>
+                <small>Check current status</small>
+            </button>
+
+            <button onclick="showPage('emi')" class="action-card">
+                <span>🧮</span>
+                <b>EMI Calculator</b>
+                <small>Calculate EMI</small>
+            </button>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ================= VERIFICATION ================= -->
+
+<section id="verification" class="page">
+
+    <div class="container">
+
+        <div class="page-heading">
+            <p class="tag">LOAN VERIFICATION</p>
+            <h2>Verify Your Loan Eligibility</h2>
+            <p>Complete all three verification steps.</p>
+        </div>
+
+
+        <div class="verification-grid">
+
+            <!-- DOCUMENT -->
+
+            <div class="verification-card">
+
+                <div class="step">01</div>
+
+                <h3>Document Verification</h3>
+
+                <p>Upload/submit your required document details.</p>
+
+                <div class="form-group">
+                    <label>Document Type</label>
+                    <select id="documentType">
+                        <option value="Aadhaar">Aadhaar Card</option>
+                        <option value="PAN">PAN Card</option>
+                        <option value="Driving License">Driving License</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Document Number</label>
+                    <input type="text" id="documentNumber">
+                </div>
+
+                <button class="btn full" onclick="verifyDocument()">
+                    Verify Document
+                </button>
+
+                <p id="documentResult" class="result"></p>
+
+            </div>
+
+
+            <!-- PAN -->
+
+            <div class="verification-card">
+
+                <div class="step">02</div>
+
+                <h3>PAN Verification</h3>
+
+                <p>Enter your 10-character PAN number.</p>
+
+                <div class="form-group">
+                    <label>PAN Number</label>
+                    <input
+                        type="text"
+                        id="panNumber"
+                        maxlength="10"
+                        placeholder="ABCDE1234F">
+                </div>
+
+                <button class="btn full" onclick="verifyPAN()">
+                    Verify PAN
+                </button>
+
+                <p id="panResult" class="result"></p>
+
+            </div>
+
+
+            <!-- CIBIL -->
+
+            <div class="verification-card">
+
+                <div class="step">03</div>
+
+                <h3>CIBIL + Score Card</h3>
+
+                <p>Enter CIBIL score for loan eligibility.</p>
+
+                <div class="form-group">
+                    <label>CIBIL Score</label>
+                    <input
+                        type="number"
+                        id="cibilScore"
+                        min="300"
+                        max="900"
+                        placeholder="Example: 750">
+                </div>
+
+                <button class="btn full" onclick="verifyCibil()">
+                    Check Score
+                </button>
+
+                <p id="cibilResult" class="result"></p>
+
+            </div>
+
+        </div>
+
+
+        <div id="eligibilityBox" class="eligibility-box hidden">
+
+            <h3>Loan Eligibility</h3>
+
+            <p id="eligibilityText"></p>
+
+            <button
+                id="continueLoanBtn"
+                onclick="showPage('loanApplication')"
+                class="btn">
+                Continue to Loan Application
+            </button>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ================= LOAN APPLICATION ================= -->
+
+<section id="loanApplication" class="page">
+
+    <div class="container narrow">
+
+        <div class="form-card">
+
+            <h2>Loan Application</h2>
+
+            <p class="sub-text">
+                Fill the details below to submit your loan application.
+            </p>
+
+            <div id="loanEligibilityMessage"></div>
+
+            <form onsubmit="submitLoanApplication(event)">
+
+                <div class="form-group">
+                    <label>Loan Type</label>
+
+                    <select id="loanType" required>
+
+                        <option value="">Select Loan Type</option>
+                        <option>Personal Loan</option>
+                        <option>Home Loan</option>
+                        <option>Business Loan</option>
+                        <option>Education Loan</option>
+                        <option>Vehicle Loan</option>
+
+                    </select>
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label>Loan Amount (₹)</label>
+                        <input
+                            type="number"
+                            id="loanAmount"
+                            min="10000"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tenure (Years)</label>
+                        <input
+                            type="number"
+                            id="loanTenure"
+                            min="1"
+                            max="30"
+                            required>
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label>Monthly Income (₹)</label>
+                        <input
+                            type="number"
+                            id="monthlyIncome"
+                            min="1"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Employment Type</label>
+
+                        <select id="employmentType" required>
+                            <option value="">Select</option>
+                            <option>Salaried</option>
+                            <option>Self Employed</option>
+                            <option>Business</option>
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+                    <label>Purpose of Loan</label>
+
+                    <textarea
+                        id="loanPurpose"
+                        rows="4"
+                        required></textarea>
+                </div>
+
+
+                <button class="btn full" type="submit">
+                    Submit Loan Application
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ================= STATUS ================= -->
+
+<section id="status" class="page">
+
+    <div class="container">
+
+        <div class="page-heading">
+            <p class="tag">APPLICATION STATUS</p>
+            <h2>Track Your Loan Application</h2>
+        </div>
+
+        <div id="customerStatusBox" class="status-container"></div>
+
+    </div>
+</section>
+
+
+<!-- ================= EMI ================= -->
+
+<section id="emi" class="page">
+
+    <div class="container small">
+
+        <div class="form-card">
+
+            <h2>EMI Calculator</h2>
+
+            <p class="sub-text">
+                Calculate your estimated monthly EMI.
+            </p>
+
+            <div class="form-group">
+                <label>Loan Amount (₹)</label>
+                <input type="number" id="emiAmount" placeholder="500000">
+            </div>
+
+            <div class="form-group">
+                <label>Interest Rate (% per year)</label>
+                <input type="number" id="emiRate" step="0.01" placeholder="10">
+            </div>
+
+            <div class="form-group">
+                <label>Tenure (Years)</label>
+                <input type="number" id="emiYears" placeholder="5">
+            </div>
+
+            <button onclick="calculateEMI()" class="btn full">
+                Calculate EMI
+            </button>
+
+            <div id="emiResult" class="emi-result"></div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ================= ADMIN LOGIN ================= -->
+
+<section id="adminLogin" class="page">
+
+    <div class="container small">
+
+        <div class="form-card">
+
+            <div class="admin-icon">⚙️</div>
+
+            <h2>Admin Login</h2>
+
+            <p class="sub-text">
+                Authorized administrator access
+            </p>
+
+            <form onsubmit="adminLogin(event)">
+
+                <div class="form-group">
+                    <label>Admin Username</label>
+                    <input type="text" id="adminUsername" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="adminPassword" required>
+                </div>
+
+                <button class="btn full" type="submit">
+                    Admin Login
+                </button>
+
+            </form>
+
+            <div class="demo-login">
+                <b>Demo Login</b>
+                <br>
+                Username: ESHA 
+                <br>
+                Password: 004ranu
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ================= ADMIN DASHBOARD ================= -->
+
+<section id="adminDashboard" class="page">
+
+    <div class="container">
+
+        <div class="dashboard-header">
+
+            <div>
+                <p class="tag">ADMIN PANEL</p>
+                <h2>Admin Dashboard</h2>
+                <p>Manage customer applications and loan details.</p>
+            </div>
+
+            <button class="btn danger" onclick="adminLogout()">
+                Logout
+            </button>
+
+        </div>
+
+
+        <div class="dashboard-grid">
+
+            <div class="dash-card">
+                <span>Total Customers</span>
+                <strong id="totalCustomers">0</strong>
+            </div>
+
+            <div class="dash-card">
+                <span>Total Applications</span>
+                <strong id="totalApplications">0</strong>
+            </div>
+
+            <div class="dash-card">
+                <span>Pending</span>
+                <strong id="pendingApplications">0</strong>
+            </div>
+
+            <div class="dash-card">
+                <span>Approved</span>
+                <strong id="approvedApplications">0</strong>
+            </div>
+
+        </div>
+
+
+        <div class="admin-section">
+
+            <h3>Loan Applications</h3>
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Application ID</th>
+                            <th>Customer</th>
+                            <th>Mobile</th>
+                            <th>Loan Type</th>
+                            <th>Amount</th>
+                            <th>CIBIL</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="adminApplicationsTable"></tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ================= CLIENT DETAILS ================= -->
+
+<section id="clientDetails" class="page">
+
+    <div class="container">
+
+        <div class="page-heading">
+            <p class="tag">CLIENT / CUSTOMER DETAILS</p>
+            <h2>Customer Information</h2>
+        </div>
+
+
+        <div class="form-card">
+
+            <div class="form-group">
+
+                <label>Select Client</label>
+
+                <select id="clientSelector" onchange="showClientDetails()">
+
+                    <option value="">
+                        Select a customer
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <div id="selectedClientDetails"></div>
+
+    </div>
+</section>
+
+
+<!-- ================= LOAN DETAILS ADMIN ================= -->
+
+<section id="adminLoanDetails" class="page">
+
+    <div class="container">
+
+        <div class="page-heading">
+
+            <p class="tag">LOAN DETAILS</p>
+
+            <h2>Manage Loan Application</h2>
+
+        </div>
+
+
+        <div id="adminLoanDetailBox" class="form-card">
+
+            <p>Select an application from Admin Dashboard.</p>
+
+        </div>
+
+    </div>
+</section>
+
+
+<footer>
+
+    <div class="footer-logo">
+        EZyBzaar <span>LOAN</span>
+    </div>
+
+    <p>
+        © 2026 EZyBzaar Loan. Academic Project.
+    </p>
+
+</footer>
+
+
+<script>
+
+/* =====================================================
+   DATABASE / LOCAL STORAGE
+===================================================== */
+
+const USERS_KEY = "ezy_users";
+const APPLICATIONS_KEY = "ezy_applications";
+const CURRENT_USER_KEY = "ezy_current_user";
+
+let pendingRegistration = null;
+let selectedAdminApplication = null;
+
+
+/* =====================================================
+   GET DATA
+===================================================== */
+
+function getUsers() {
+    return JSON.parse(localStorage.getItem(USERS_KEY)) || [];
+}
+
+function getApplications() {
+    return JSON.parse(localStorage.getItem(APPLICATIONS_KEY)) || [];
+}
+
+function saveUsers(users) {
+    localStorage.setItem(USERS_KEY, JSON.stringify(users));
+}
+
+function saveApplications(applications) {
+    localStorage.setItem(APPLICATIONS_KEY, JSON.stringify(applications));
+}
+
+function getCurrentUser() {
+    const mobile = localStorage.getItem(CURRENT_USER_KEY);
+
+    if (!mobile) {
+        return null;
+    }
+
+    return getUsers().find(user => user.mobile === mobile) || null;
+}
+
+
+/* =====================================================
+   PAGE NAVIGATION
+===================================================== */
+
+function showPage(pageId) {
+
+    const pages = document.querySelectorAll(".page");
+
+    pages.forEach(page => {
+        page.classList.remove("active");
+    });
+
+    const selected = document.getElementById(pageId);
+
+    if (selected) {
+        selected.classList.add("active");
+    }
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+
+    if (pageId === "dashboard") {
+        loadCustomerDashboard();
+    }
+
+    if (pageId === "status") {
+        loadCustomerStatus();
+    }
+
+    if (pageId === "adminDashboard") {
+        loadAdminDashboard();
+    }
+
+    if (pageId === "clientDetails") {
+        loadClientSelector();
+    }
+
+    if (pageId === "loanApplication") {
+        checkLoanEligibility();
+    }
+
+}
+
+
+/* =====================================================
+   REGISTRATION
+===================================================== */
+
+function registerCustomer(event) {
+
+    event.preventDefault();
+
+    const name = document.getElementById("regName").value.trim();
+    const mobile = document.getElementById("regMobile").value.trim();
+    const email = document.getElementById("regEmail").value.trim();
+    const password = document.getElementById("regPassword").value;
+    const dob = document.getElementById("regDob").value;
+    const address = document.getElementById("regAddress").value.trim();
+
+
+    if (!/^[0-9]{10}$/.test(mobile)) {
+
+        alert("Please enter a valid 10-digit mobile number.");
+
+        return;
+    }
+
+
+    const users = getUsers();
+
+    const existing = users.find(
+        user => user.mobile === mobile
+    );
+
+
+    if (existing) {
+
+        alert("This mobile number is already registered.");
+
+        return;
+    }
+
+
+    pendingRegistration = {
+
+        id: "CUS" + Date.now(),
+
+        name,
+        mobile,
+        email,
+        password,
+        dob,
+        address,
+
+        verified: false,
+
+        documentVerified: false,
+        panVerified: false,
+
+        pan: "",
+        cibil: null,
+
+        createdAt: new Date().toLocaleString()
+
+    };
+
+
+    alert(
+        "Registration successful!\n\nDemo OTP: 1234"
+    );
+
+    showPage("otp");
+}
+
+
+/* =====================================================
+   OTP
+===================================================== */
+
+function verifyOTP() {
+
+    const otp = document.getElementById("otpInput").value.trim();
+
+    if (otp !== "1234") {
+
+        alert("Invalid OTP. Please enter 1234.");
+
+        return;
+    }
+
+
+    if (!pendingRegistration) {
+
+        alert("Registration session expired.");
+
+        showPage("register");
+
+        return;
+    }
+
+
+    pendingRegistration.verified = true;
+
+
+    const users = getUsers();
+
+    users.push(pendingRegistration);
+
+    saveUsers(users);
+
+
+    localStorage.setItem(
+        CURRENT_USER_KEY,
+        pendingRegistration.mobile
+    );
+
+
+    alert("Mobile number verified successfully!");
+
+    pendingRegistration = null;
+
+    document.getElementById("otpInput").value = "";
+
+    showPage("dashboard");
+}
+
+
+/* =====================================================
+   CUSTOMER LOGIN
+===================================================== */
+
+function customerLogin(event) {
+
+    event.preventDefault();
+
+
+    const mobile =
+        document.getElementById("loginMobile").value.trim();
+
+    const password =
+        document.getElementById("loginPassword").value;
+
+
+    const users = getUsers();
+
+
+    const user = users.find(
+        u =>
+            u.mobile === mobile &&
+            u.password === password
+    );
+
+
+    if (!user) {
+
+        alert(
+            "Invalid mobile number or password.\n\nPlease register first."
+        );
+
+        return;
+    }
+
+
+    localStorage.setItem(
+        CURRENT_USER_KEY,
+        user.mobile
+    );
+
+
+    alert("Login successful!");
+
+    loadCustomerDashboard();
+
+    showPage("dashboard");
+}
+
+
+/* =====================================================
+   CUSTOMER DASHBOARD
+===================================================== */
+
+function loadCustomerDashboard() {
+
+    const user = getCurrentUser();
+
+    if (!user) {
+
+        showPage("login");
+
+        return;
+    }
+
+
+    document.getElementById("dashboardName").textContent =
+        user.name;
+
+
+    const applications = getApplications();
+
+
+    const application = applications
+        .filter(app => app.mobile === user.mobile)
+        .sort(
+            (a, b) =>
+                new Date(b.createdAt) -
+                new Date(a.createdAt)
+        )[0];
+
+
+    document.getElementById("dashApplicationId").textContent =
+        application
+            ? application.applicationId
+            : "Not Applied";
+
+
+    document.getElementById("dashStatus").textContent =
+        application
+            ? application.status
+            : "Not Applied";
+
+
+    document.getElementById("dashCibil").textContent =
+        user.cibil
+            ? user.cibil
+            : "Not Checked";
+
+
+    let verification = "Pending";
+
+
+    if (
+        user.documentVerified &&
+        user.panVerified &&
+        user.cibil >= 725
+    ) {
+
+        verification = "Verified";
+
+    } else if (
+        user.documentVerified ||
+        user.panVerified ||
+        user.cibil
+    ) {
+
+        verification = "Partial";
+
+    }
+
+
+    document.getElementById("dashVerification").textContent =
+        verification;
+}
+
+
+/* =====================================================
+   DOCUMENT VERIFICATION
+===================================================== */
+
+function verifyDocument() {
+
+    const user = getCurrentUser();
+
+
+    if (!user) {
+
+        alert("Please login first.");
+
+        showPage("login");
+
+        return;
+    }
+
+
+    const documentNumber =
+        document.getElementById("documentNumber")
+        .value
+        .trim();
+
+
+    if (documentNumber.length < 5) {
+
+        document.getElementById("documentResult").innerHTML =
+            "❌ Please enter a valid document number.";
+
+        return;
+    }
+
+
+    const users = getUsers();
+
+    const index = users.findIndex(
+        u => u.mobile === user.mobile
+    );
+
+
+    users[index].documentVerified = true;
+
+    users[index].documentType =
+        document.getElementById("documentType").value;
+
+    users[index].documentNumber =
+        documentNumber;
+
+
+    saveUsers(users);
+
+
+    document.getElementById("documentResult").innerHTML =
+        "✅ Document verified successfully.";
+
+    loadCustomerDashboard();
+}
+
+
+/* =====================================================
+   PAN VERIFICATION
+===================================================== */
+
+function verifyPAN() {
+
+    const user = getCurrentUser();
+
+
+    if (!user) {
+
+        alert("Please login first.");
+
+        showPage("login");
+
+        return;
+    }
+
+
+    const pan =
+        document.getElementById("panNumber")
+        .value
+        .trim()
+        .toUpperCase();
+
+
+    const panPattern =
+        /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+
+
+    if (!panPattern.test(pan)) {
+
+        document.getElementById("panResult").innerHTML =
+            "❌ Invalid PAN format.";
+
+        return;
+    }
+
+
+    const users = getUsers();
+
+    const index = users.findIndex(
+        u => u.mobile === user.mobile
+    );
+
+
+    users[index].pan = pan;
+
+    users[index].panVerified = true;
+
+
+    saveUsers(users);
+
+
+    document.getElementById("panResult").innerHTML =
+        "✅ PAN verified successfully.";
+
+    loadCustomerDashboard();
+}
+
+
+/* =====================================================
+   CIBIL VERIFICATION
+===================================================== */
+
+function verifyCibil() {
+
+    const user = getCurrentUser();
+
+
+    if (!user) {
+
+        alert("Please login first.");
+
+        showPage("login");
+
+        return;
+    }
+
+
+    const score =
+        Number(
+            document.getElementById("cibilScore").value
+        );
+
+
+    if (!score || score < 300 || score > 900) {
+
+        document.getElementById("cibilResult").innerHTML =
+            "❌ Please enter a score between 300 and 900.";
+
+        return;
+    }
+
+
+    const users = getUsers();
+
+    const index = users.findIndex(
+        u => u.mobile === user.mobile
+    );
+
+
+    users[index].cibil = score;
+
+
+    saveUsers(users);
+
+
+    if (score >= 725) {
+
+        document.getElementById("cibilResult").innerHTML =
+            "✅ CIBIL Score: " +
+            score +
+            " — Eligible.";
+
+    } else {
+
+        document.getElementById("cibilResult").innerHTML =
+            "❌ CIBIL Score: " +
+            score +
+            " — Not Eligible. Minimum required score is 725.";
+
+    }
+
+
+    showEligibilityBox(score);
+
+    loadCustomerDashboard();
+}
+
+
+/* =====================================================
+   ELIGIBILITY
+===================================================== */
+
+function showEligibilityBox(score) {
+
+    const box =
+        document.getElementById("eligibilityBox");
+
+    const text =
+        document.getElementById("eligibilityText");
+
+    const button =
+        document.getElementById("continueLoanBtn");
+
+
+    box.classList.remove("hidden");
+
+
+    if (score >= 725) {
+
+        box.classList.remove("not-eligible");
+
+        text.innerHTML =
+            "🎉 Your CIBIL Score is <b>" +
+            score +
+            "</b>. You are eligible to proceed with the loan application.";
+
+        button.style.display = "inline-block";
+
+    } else {
+
+        box.classList.add("not-eligible");
+
+        text.innerHTML =
+            "Your CIBIL Score is <b>" +
+            score +
+            "</b>. The minimum required score is 725.";
+
+        button.style.display = "none";
+    }
+}
+
+
+/* =====================================================
+   LOAN ELIGIBILITY CHECK
+===================================================== */
+
+function checkLoanEligibility() {
+
+    const user = getCurrentUser();
+
+    const message =
+        document.getElementById("loanEligibilityMessage");
+
+
+    if (!user) {
+
+        message.innerHTML =
+            `<div class="alert error">
+                Please login first.
+             </div>`;
+
+        return;
+    }
+
+
+    if (!user.cibil || user.cibil < 725) {
+
+        message.innerHTML =
+            `<div class="alert error">
+                ❌ Loan application is not available.
+                Complete CIBIL verification with a score of at least 725.
+             </div>`;
+
+        return;
+    }
+
+
+    if (
+        !user.documentVerified ||
+        !user.panVerified
+    ) {
+
+        message.innerHTML =
+            `<div class="alert warning">
+                ⚠️ Please complete Document and PAN verification before applying.
+             </div>`;
+
+        return;
+    }
+
+
+    message.innerHTML =
+        `<div class="alert success">
+            ✅ Verification complete. You can submit your loan application.
+         </div>`;
+}
+
+
+/* =====================================================
+   LOAN APPLICATION
+===================================================== */
+
+function submitLoanApplication(event) {
+
+    event.preventDefault();
+
+
+    const user = getCurrentUser();
+
+
+    if (!user) {
+
+        alert("Please login first.");
+
+        showPage("login");
+
+        return;
+    }
+
+
+    if (
+        !user.documentVerified ||
+        !user.panVerified ||
+        !user.cibil ||
+        user.cibil < 725
+    ) {
+
+        alert(
+            "You are not eligible to submit the loan application.\n\n" +
+            "Complete Document, PAN and CIBIL verification first."
+        );
+
+        showPage("verification");
+
+        return;
+    }
+
+
+    const applications = getApplications();
+
+
+    const applicationId =
+        "EZB" +
+        new Date().getFullYear() +
+        Math.floor(
+            100000 + Math.random() * 900000
+        );
+
+
+    const application = {
+
+        applicationId,
+
+        customerId: user.id,
+
+        name: user.name,
+
+        mobile: user.mobile,
+
+        email: user.email,
+
+        loanType:
+            document.getElementById("loanType").value,
+
+        amount:
+            Number(
+                document.getElementById("loanAmount").value
+            ),
+
+        tenure:
+            Number(
+                document.getElementById("loanTenure").value
+            ),
+
+        monthlyIncome:
+            Number(
+                document.getElementById("monthlyIncome").value
+            ),
+
+        employmentType:
+            document.getElementById("employmentType").value,
+
+        purpose:
+            document.getElementById("loanPurpose").value,
+
+        cibil: user.cibil,
+
+        status: "Pending",
+
+        adminRemark: "",
+
+        createdAt: new Date().toISOString(),
+
+        updatedAt: new Date().toISOString()
+
+    };
+
+
+    applications.push(application);
+
+    saveApplications(applications);
+
+
+    alert(
+        "Loan Application Submitted Successfully!\n\n" +
+        "Application ID: " +
+        applicationId
+    );
+
+
+    document.querySelector(
+        "#loanApplication form"
+    ).reset();
+
+
+    showPage("status");
+}
+
+
+/* =====================================================
+   CUSTOMER STATUS
+===================================================== */
+
+function loadCustomerStatus() {
+
+    const user = getCurrentUser();
+
+    const box =
+        document.getElementById("customerStatusBox");
+
+
+    if (!user) {
+
+        box.innerHTML =
+            `<div class="form-card center">
+                <h3>Please Login</h3>
+                <button class="btn"
+                    onclick="showPage('login')">
+                    Customer Login
+                </button>
+             </div>`;
+
+        return;
+    }
+
+
+    const applications =
+        getApplications()
+        .filter(
+            app => app.mobile === user.mobile
+        )
+        .sort(
+            (a, b) =>
+                new Date(b.createdAt) -
+                new Date(a.createdAt)
+        );
+
+
+    if (applications.length === 0) {
+
+        box.innerHTML =
+            `<div class="form-card center">
+                <h3>No Loan Application Found</h3>
+                <p>Complete verification and apply for a loan.</p>
+
+                <button class="btn"
+                    onclick="showPage('verification')">
+                    Start Verification
+                </button>
+             </div>`;
+
+        return;
+    }
+
+
+    box.innerHTML =
+        applications.map(app => `
+
+        <div class="status-card">
+
+            <div class="status-top">
+
+                <div>
+                    <span>Application ID</span>
+                    <h2>${app.applicationId}</h2>
+                </div>
+
+                <span class="status ${getStatusClass(app.status)}">
+                    ${app.status}
+                </span>
+
+            </div>
+
+
+            <div class="status-details">
+
+                <div>
+                    <span>Loan Type</span>
+                    <b>${app.loanType}</b>
+                </div>
+
+                <div>
+                    <span>Loan Amount</span>
+                    <b>₹${Number(app.amount).toLocaleString("en-IN")}</b>
+                </div>
+
+                <div>
+                    <span>Tenure</span>
+                    <b>${app.tenure} Years</b>
+                </div>
+
+                <div>
+                    <span>CIBIL Score</span>
+                    <b>${app.cibil}</b>
+                </div>
+
+            </div>
+
+
+            <div class="timeline">
+
+                <div class="timeline-item completed">
+                    <span>1</span>
+                    <b>Application Submitted</b>
+                </div>
+
+                <div class="timeline-item completed">
+                    <span>2</span>
+                    <b>Verification Completed</b>
+                </div>
+
+                <div class="timeline-item ${
+                    app.status !== "Pending"
+                        ? "completed"
+                        : "current"
+                }">
+                    <span>3</span>
+                    <b>Admin Review</b>
+                </div>
+
+                <div class="timeline-item ${
+                    app.status === "Approved"
+                        ? "completed"
+                        : ""
+                }">
+                    <span>4</span>
+                    <b>Final Decision</b>
+                </div>
+
+            </div>
+
+
+            ${
+                app.adminRemark
+                    ? `
+                    <div class="remark">
+                        <b>Admin Remark:</b>
+                        ${app.adminRemark}
+                    </div>
+                    `
+                    : ""
+            }
+
+        </div>
+
+        `).join("");
+}
+
+
+/* =====================================================
+   STATUS CLASS
+===================================================== */
+
+function getStatusClass(status) {
+
+    if (status === "Approved") {
+        return "approved";
+    }
+
+    if (status === "Rejected") {
+        return "rejected";
+    }
+
+    return "pending";
+}
+
+
+/* =====================================================
+   ADMIN LOGIN
+===================================================== */
+
+function adminLogin(event) {
+
+    event.preventDefault();
+
+
+    const username =
+        document.getElementById("adminUsername").value.trim();
+
+    const password =
+        document.getElementById("adminPassword").value;
+
+
+    if (
+        username === "admin" &&
+        password === "admin123"
+    ) {
+
+        localStorage.setItem(
+            "ezy_admin_login",
+            "true"
+        );
+
+
+        alert("Admin login successful!");
+
+        showPage("adminDashboard");
+
+    } else {
+
+        alert(
+            "Invalid Admin Login.\n\nUsername: admin\nPassword: admin123"
+        );
+    }
+}
+
+
+/* =====================================================
+   ADMIN DASHBOARD
+===================================================== */
+
+function loadAdminDashboard() {
+
+    const isAdmin =
+        localStorage.getItem("ezy_admin_login");
+
+
+    if (isAdmin !== "true") {
+
+        showPage("adminLogin");
+
+        return;
+    }
+
+
+    const users = getUsers();
+
+    const applications = getApplications();
+
+
+    document.getElementById("totalCustomers")
+        .textContent = users.length;
+
+
+    document.getElementById("totalApplications")
+        .textContent = applications.length;
+
+
+    document.getElementById("pendingApplications")
+        .textContent =
+        applications.filter(
+            app => app.status === "Pending"
+        ).length;
+
+
+    document.getElementById("approvedApplications")
+        .textContent =
+        applications.filter(
+            app => app.status === "Approved"
+        ).length;
+
+
+    const table =
+        document.getElementById(
+            "adminApplicationsTable"
+        );
+
+
+    if (applications.length === 0) {
+
+        table.innerHTML =
+            `<tr>
+                <td colspan="8" class="empty">
+                    No loan applications submitted yet.
+                </td>
+             </tr>`;
+
+        return;
+    }
+
+
+    table.innerHTML =
+        applications
+        .slice()
+        .reverse()
+        .map(app => `
+
+        <tr>
+
+            <td>
+                <b>${app.applicationId}</b>
+            </td>
+
+            <td>${app.name}</td>
+
+            <td>${app.mobile}</td>
+
+            <td>${app.loanType}</td>
+
+            <td>
+                ₹${Number(app.amount).toLocaleString("en-IN")}
+            </td>
+
+            <td>${app.cibil}</td>
+
+            <td>
+                <span class="status ${getStatusClass(app.status)}">
+                    ${app.status}
+                </span>
+            </td>
+
+            <td>
+
+                <button
+                    class="small-btn"
+                    onclick="openAdminLoan('${app.applicationId}')">
+                    View
+                </button>
+
+                <button
+                    class="small-btn"
+                    onclick="openClientFromApplication('${app.mobile}')">
+                    Client
+                </button>
+
+            </td>
+
+        </tr>
+
+        `).join("");
+}
+
+
+/* =====================================================
+   ADMIN LOAN DETAILS
+===================================================== */
+
+function openAdminLoan(applicationId) {
+
+    const applications = getApplications();
+
+
+    const application =
+        applications.find(
+            app => app.applicationId === applicationId
+        );
+
+
+    if (!application) {
+
+        alert("Application not found.");
+
+        return;
+    }
+
+
+    selectedAdminApplication = applicationId;
+
+
+    const box =
+        document.getElementById(
+            "adminLoanDetailBox"
+        );
+
+
+    box.innerHTML = `
+
+        <div class="loan-detail">
+
+            <div class="detail-header">
+
+                <div>
+                    <span>Application ID</span>
+                    <h2>${application.applicationId}</h2>
+                </div>
+
+                <span class="status ${getStatusClass(application.status)}">
+                    ${application.status}
+                </span>
+
+            </div>
+
+
+            <div class="detail-grid">
+
+                <div>
+                    <span>Customer Name</span>
+                    <b>${application.name}</b>
+                </div>
+
+                <div>
+                    <span>Mobile</span>
+                    <b>${application.mobile}</b>
+                </div>
+
+                <div>
+                    <span>Email</span>
+                    <b>${application.email}</b>
+                </div>
+
+                <div>
+                    <span>Loan Type</span>
+                    <b>${application.loanType}</b>
+                </div>
+
+                <div>
+                    <span>Loan Amount</span>
+                    <b>₹${Number(application.amount).toLocaleString("en-IN")}</b>
+                </div>
+
+                <div>
+                    <span>Tenure</span>
+                    <b>${application.tenure} Years</b>
+                </div>
+
+                <div>
+                    <span>Monthly Income</span>
+                    <b>₹${Number(application.monthlyIncome).toLocaleString("en-IN")}</b>
+                </div>
+
+                <div>
+                    <span>Employment</span>
+                    <b>${application.employmentType}</b>
+                </div>
+
+                <div>
+                    <span>CIBIL Score</span>
+                    <b>${application.cibil}</b>
+                </div>
+
+                <div>
+                    <span>Purpose</span>
+                    <b>${application.purpose}</b>
+                </div>
+
+            </div>
+
+
+            <hr>
+
+
+            <h3>Update Application</h3>
+
+
+            <div class="form-group">
+
+                <label>Status</label>
+
+                <select id="adminStatus">
+
+                    <option ${
+                        application.status === "Pending"
+                            ? "selected"
+                            : ""
+                    }>
+                        Pending
+                    </option>
+
+                    <option ${
+                        application.status === "Approved"
+                            ? "selected"
+                            : ""
+                    }>
+                        Approved
+                    </option>
+
+                    <option ${
+                        application.status === "Rejected"
+                            ? "selected"
+                            : ""
+                    }>
+                        Rejected
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Admin Remark</label>
+
+                <textarea
+                    id="adminRemark"
+                    rows="4"
+                    placeholder="Enter remark...">${application.adminRemark || ""}</textarea>
+
+            </div>
+
+
+            <button
+                class="btn"
+                onclick="updateApplicationStatus()">
+                Update Application
+            </button>
+
+        </div>
+
+    `;
+
+
+    showPage("adminLoanDetails");
+}
+
+
+/* =====================================================
+   UPDATE APPLICATION
+===================================================== */
+
+function updateApplicationStatus() {
+
+    if (!selectedAdminApplication) {
+
+        return;
+    }
+
+
+    const applications = getApplications();
+
+
+    const index =
+        applications.findIndex(
+            app =>
+                app.applicationId ===
+                selectedAdminApplication
+        );
+
+
+    if (index === -1) {
+
+        alert("Application not found.");
+
+        return;
+    }
+
+
+    applications[index].status =
+        document.getElementById("adminStatus").value;
+
+
+    applications[index].adminRemark =
+        document.getElementById("adminRemark").value;
+
+
+    applications[index].updatedAt =
+        new Date().toISOString();
+
+
+    saveApplications(applications);
+
+
+    alert(
+        "Application status updated successfully!"
+    );
+
+
+    showPage("adminDashboard");
+}
+
+
+/* =====================================================
+   CLIENT SELECTOR
+===================================================== */
+
+function loadClientSelector() {
+
+    const selector =
+        document.getElementById("clientSelector");
+
+
+    const users = getUsers();
+
+
+    selector.innerHTML =
+        `<option value="">
+            Select a customer
+         </option>`;
+
+
+    users.forEach(user => {
+
+        selector.innerHTML +=
+            `<option value="${user.mobile}">
+                ${user.name} - ${user.mobile}
+             </option>`;
+
+    });
+}
+
+
+/* =====================================================
+   CLIENT DETAILS
+===================================================== */
+
+function showClientDetails() {
+
+    const mobile =
+        document.getElementById(
+            "clientSelector"
+        ).value;
+
+
+    const box =
+        document.getElementById(
+            "selectedClientDetails"
+        );
+
+
+    if (!mobile) {
+
+        box.innerHTML = "";
+
+        return;
+    }
+
+
+    const users = getUsers();
+
+
+    const user =
+        users.find(
+            u => u.mobile === mobile
+        );
+
+
+    if (!user) {
+
+        box.innerHTML =
+            `<div class="alert error">
+                Customer not found.
+             </div>`;
+
+        return;
+    }
+
+
+    const applications =
+        getApplications()
+        .filter(
+            app => app.mobile === mobile
+        );
+
+
+    box.innerHTML = `
+
+        <div class="client-detail-card">
+
+            <div class="client-header">
+
+                <div class="profile-circle">
+                    ${user.name.charAt(0).toUpperCase()}
+                </div>
+
+                <div>
+                    <h2>${user.name}</h2>
+                    <p>Customer ID: ${user.id}</p>
+                </div>
+
+            </div>
+
+
+            <div class="detail-grid">
+
+                <div>
+                    <span>Full Name</span>
+                    <b>${user.name}</b>
+                </div>
+
+                <div>
+                    <span>Mobile</span>
+                    <b>${user.mobile}</b>
+                </div>
+
+                <div>
+                    <span>Email</span>
+                    <b>${user.email}</b>
+                </div>
+
+                <div>
+                    <span>Date of Birth</span>
+                    <b>${user.dob}</b>
+                </div>
+
+                <div>
+                    <span>Address</span>
+                    <b>${user.address}</b>
+                </div>
+
+                <div>
+                    <span>PAN</span>
+                    <b>${user.pan || "Not Verified"}</b>
+                </div>
+
+                <div>
+                    <span>CIBIL Score</span>
+                    <b>${user.cibil || "Not Checked"}</b>
+                </div>
+
+                <div>
+                    <span>Document Verification</span>
+                    <b>
+                        ${
+                            user.documentVerified
+                                ? "✓ Verified"
+                                : "Pending"
+                        }
+                    </b>
+                </div>
+
+                <div>
+                    <span>PAN Verification</span>
+                    <b>
+                        ${
+                            user.panVerified
+                                ? "✓ Verified"
+                                : "Pending"
+                        }
+                    </b>
+                </div>
+
+            </div>
+
+
+            <hr>
+
+
+            <h3>Customer Loan Applications</h3>
+
+            ${
+                applications.length === 0
+
+                    ? `
+                    <p class="empty">
+                        No loan applications submitted.
+                    </p>
+                    `
+
+                    : `
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+                                    <th>Application ID</th>
+                                    <th>Loan</th>
+                                    <th>Amount</th>
+                                    <th>CIBIL</th>
+                                    <th>Status</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                ${applications.map(app => `
+
+                                    <tr>
+
+                                        <td>
+                                            ${app.applicationId}
+                                        </td>
+
+                                        <td>
+                                            ${app.loanType}
+                                        </td>
+
+                                        <td>
+                                            ₹${Number(app.amount).toLocaleString("en-IN")}
+                                        </td>
+
+                                        <td>
+                                            ${app.cibil}
+                                        </td>
+
+                                        <td>
+                                            <span class="status ${getStatusClass(app.status)}">
+                                                ${app.status}
+                                            </span>
+                                        </td>
+
+                                    </tr>
+
+                                `).join("")}
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                    `
+            }
+
+        </div>
+
+    `;
+}
+
+
+/* =====================================================
+   OPEN CLIENT FROM ADMIN APPLICATION
+===================================================== */
+
+function openClientFromApplication(mobile) {
+
+    showPage("clientDetails");
+
+    setTimeout(() => {
+
+        const selector =
+            document.getElementById(
+                "clientSelector"
+            );
+
+        selector.value = mobile;
+
+        showClientDetails();
+
+    }, 50);
+}
+
+
+/* =====================================================
+   CUSTOMER LOGOUT
+===================================================== */
+
+function logoutCustomer() {
+
+    localStorage.removeItem(
+        CURRENT_USER_KEY
+    );
+
+    alert("You have been logged out.");
+
+    showPage("login");
+}
+
+
+/* =====================================================
+   ADMIN LOGOUT
+===================================================== */
+
+function adminLogout() {
+
+    localStorage.removeItem(
+        "ezy_admin_login"
+    );
+
+    alert("Admin logged out.");
+
+    showPage("adminLogin");
+}
+
+
+/* =====================================================
+   EMI CALCULATOR
+===================================================== */
+
+function calculateEMI() {
+
+    const amount =
+        Number(
+            document.getElementById("emiAmount").value
+        );
+
+    const annualRate =
+        Number(
+            document.getElementById("emiRate").value
+        );
+
+    const years =
+        Number(
+            document.getElementById("emiYears").value
+        );
+
+
+    if (
+        !amount ||
+        !annualRate ||
+        !years
+    ) {
+
+        alert("Please enter all EMI details.");
+
+        return;
+    }
+
+
+    const monthlyRate =
+        annualRate / 12 / 100;
+
+    const months =
+        years * 12;
+
+
+    const emi =
+        amount *
+        monthlyRate *
+        Math.pow(
+            1 + monthlyRate,
+            months
+        ) /
+        (
+            Math.pow(
+                1 + monthlyRate,
+                months
+            ) - 1
+        );
+
+
+    const totalPayment =
+        emi * months;
+
+
+    const totalInterest =
+        totalPayment - amount;
+
+
+    document.getElementById(
+        "emiResult"
+    ).innerHTML = `
+
+        <div class="emi-box">
+
+            <div>
+                <span>Monthly EMI</span>
+
+                <strong>
+                    ₹${Math.round(emi).toLocaleString("en-IN")}
+                </strong>
+            </div>
+
+            <div>
+                <span>Total Interest</span>
+
+                <strong>
+                    ₹${Math.round(totalInterest).toLocaleString("en-IN")}
+                </strong>
+            </div>
+
+            <div>
+                <span>Total Payment</span>
+
+                <strong>
+                    ₹${Math.round(totalPayment).toLocaleString("en-IN")}
+                </strong>
+            </div>
+
+        </div>
+
+    `;
+}
+
+
+/* =====================================================
+   STARTUP
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const user = getCurrentUser();
+
+
+        if (user) {
+
+            loadCustomerDashboard();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
